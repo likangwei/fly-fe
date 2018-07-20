@@ -10,6 +10,22 @@ import LeadSteps from '../components/LeadSteps'
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
+const ReadMe = () => {
+  return (
+    <div>
+      <pre>
+      五步流程
+      PDCA
+      问题 -> 分析 -> 方案 -> 预期目标 -> 结果对比 -> 复盘
+      存在的意义-> 愿景 -> 目标 -> 方案 -> 任务 -> 复盘
+      引导很重要。 要有特别舒服的引导，躺着进化的感觉。
+      要能展示出来自己的进步，形成正向激励
+      </pre>
+      
+    </div>
+  )
+}
+
 export class IndexPage extends React.Component{
 
   render(){
@@ -43,7 +59,11 @@ export class IndexPage extends React.Component{
                     lead
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="2">option2</Menu.Item>
+                <Menu.Item key="2">
+                 <Link to="/index">
+                    index
+                  </Link>
+                </Menu.Item>
                 <Menu.Item key="3">option3</Menu.Item>
                 <Menu.Item key="4">option4</Menu.Item>
               </SubMenu>
@@ -68,8 +88,8 @@ export class IndexPage extends React.Component{
               <Breadcrumb.Item>App</Breadcrumb.Item>
             </Breadcrumb>
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
-              content {this.props.match.params.id}
               <Route path="/lead/1" exact component={LeadSteps} />
+              <Route path="/index" exact component={ReadMe} />
             </Content>
           </Layout>
         </Layout>
