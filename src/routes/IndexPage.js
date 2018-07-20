@@ -30,6 +30,7 @@ export class IndexPage extends React.Component{
 
   render(){
     console.log(this.props)
+    const {match} = this.props
     return (
         <Layout>
         <Header className="header">
@@ -64,7 +65,11 @@ export class IndexPage extends React.Component{
                     index
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="3">option3</Menu.Item>
+                <Menu.Item key="3">
+                  <Link to={`${match.url}target`}>
+                    目标
+                  </Link>
+                </Menu.Item>
                 <Menu.Item key="4">option4</Menu.Item>
               </SubMenu>
               <SubMenu key="sub2" title={<span><Icon type="laptop" />subnav 2</span>}>
