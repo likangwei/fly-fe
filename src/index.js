@@ -13,6 +13,8 @@ app.use(createLoading());
 // 3. Model
 // app.model(require('./models/example').default);
 app.model(require('./models/problem').default);
+app.model(require('./models/reason').default);
+
 // 4. Router
 app.router(require('./router').default);
 

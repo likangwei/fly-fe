@@ -3,7 +3,7 @@ import { Modal, Form, Input } from 'antd';
 
 const FormItem = Form.Item;
 
-class ProblemEditModal extends Component {
+class ReasonEditModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,17 +47,12 @@ class ProblemEditModal extends Component {
       <span>
         <span onClick={this.showModelHandler}>{children}</span>
         <Modal
-          title="Edit Problem"
+          title="Edit Anaylsis"
           visible={this.state.visible}
           onOk={this.okHandler}
           onCancel={this.hideModelHandler}
         >
           <Form layout="horizontal" onSubmit={this.okHandler}>
-            <FormItem {...formItemLayout} label="title">
-              {getFieldDecorator('title', {
-                initialValue: title,
-              })(<Input />)}
-            </FormItem>
             <FormItem {...formItemLayout} label="content">
               {getFieldDecorator('content', {
                 initialValue: content,
@@ -70,4 +65,4 @@ class ProblemEditModal extends Component {
   }
 }
 
-export default Form.create()(ProblemEditModal);
+export default Form.create()(ReasonEditModal);

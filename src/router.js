@@ -7,9 +7,7 @@ function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={IndexPage} />
-        <Route path="/:subnav/" exact component={IndexPage} />
-        <Route path="/:subnav/:option" exact component={IndexPage} />
+        <Route path="/*" exact component={IndexPage} />
       </Switch>
     </Router>
   );

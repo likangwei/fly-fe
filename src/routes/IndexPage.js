@@ -6,6 +6,10 @@ import { Link } from 'dva/router';
 import { Router, Route, Switch } from 'dva/router';
 import LeadSteps from '../components/LeadSteps'
 import Problems from '../components/problem/Problems'
+import Reasons from '../components/reason/Reasons'
+import ReasonDetail from '../components/reason/ReasonDetail'
+
+
 
 
 const { SubMenu } = Menu;
@@ -42,7 +46,7 @@ export class IndexPage extends React.Component{
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={['2']}
+            defaultSelectedKeys={['1']}
             style={{ lineHeight: '64px' }}
           >
             <Menu.Item key="1">目标</Menu.Item>
@@ -57,17 +61,24 @@ export class IndexPage extends React.Component{
             <Menu
               mode="inline"
               defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
+              defaultOpenKeys={['5step']}
               style={{ height: '100%', borderRight: 0 }}
             >
-              <SubMenu key="5step" title={<span><Icon type="laptop" />5步流程</span>}>
+              <SubMenu
+                key="5step" 
+                title={<span><Icon type="laptop" />5步流程</span>}
+              >
                 <Menu.Item key="target">目标</Menu.Item>
                 <Menu.Item key="found_question">
                   <Link to="/5step/problem">
                     发现问题
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="analysis_question">分析问题</Menu.Item>
+                <Menu.Item key="reason">
+                  <Link to="/5step/reason">
+                    分析问题
+                  </Link>
+                </Menu.Item>
                 <Menu.Item key="make_plan">制定方案</Menu.Item>
                 <Menu.Item key="do">坚定执行</Menu.Item>
                 <Menu.Item key="principle">总结原则</Menu.Item>
@@ -110,6 +121,8 @@ export class IndexPage extends React.Component{
               <Route path="/lead/1" exact component={LeadSteps} />
               <Route path="/" exact component={ReadMe} />
               <Route path="/5step/problem" exact component={Problems} />
+              <Route path="/5step/reason" exact component={Reasons} />
+              <Route path="/5step/reason/:id" exact component={ReasonDetail} />
             </Content>
           </Layout>
         </Layout>
