@@ -5,6 +5,7 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import { Link } from 'dva/router';
 import { Router, Route, Switch } from 'dva/router';
 import LeadSteps from '../components/LeadSteps'
+import Problems from '../components/problem/Problems'
 
 
 const { SubMenu } = Menu;
@@ -29,8 +30,11 @@ const ReadMe = () => {
 export class IndexPage extends React.Component{
 
   render(){
-    console.log(this.props)
-    const {match} = this.props
+    let match = this.props.match
+    console.log(match)
+    let subnav = match.params.subnav || "5step"
+    let option = match.params || ""
+
     return (
         <Layout>
         <Header className="header">
@@ -43,7 +47,9 @@ export class IndexPage extends React.Component{
           >
             <Menu.Item key="1">目标</Menu.Item>
             <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
+            <Menu.Item key="3">
+              <a target="_blank" href="https://k6cd7r.axshare.com">Axture</a>
+            </Menu.Item>
           </Menu>
         </Header>
         <Layout>
@@ -54,6 +60,19 @@ export class IndexPage extends React.Component{
               defaultOpenKeys={['sub1']}
               style={{ height: '100%', borderRight: 0 }}
             >
+              <SubMenu key="5step" title={<span><Icon type="laptop" />5步流程</span>}>
+                <Menu.Item key="target">目标</Menu.Item>
+                <Menu.Item key="found_question">
+                  <Link to="/5step/problem">
+                    发现问题
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="analysis_question">分析问题</Menu.Item>
+                <Menu.Item key="make_plan">制定方案</Menu.Item>
+                <Menu.Item key="do">坚定执行</Menu.Item>
+                <Menu.Item key="principle">总结原则</Menu.Item>
+              </SubMenu>
+
               <SubMenu key="sub1" title={<span><Icon type="user" />引导</span>}>
                 <Menu.Item key="1">
                   <Link to="/lead/1">
@@ -72,12 +91,7 @@ export class IndexPage extends React.Component{
                 </Menu.Item>
                 <Menu.Item key="4">option4</Menu.Item>
               </SubMenu>
-              <SubMenu key="sub2" title={<span><Icon type="laptop" />subnav 2</span>}>
-                <Menu.Item key="5">option5</Menu.Item>
-                <Menu.Item key="6">option6</Menu.Item>
-                <Menu.Item key="7">option7</Menu.Item>
-                <Menu.Item key="8">option8</Menu.Item>
-              </SubMenu>
+
               <SubMenu key="sub3" title={<span><Icon type="notification" />subnav 3</span>}>
                 <Menu.Item key="9">option9</Menu.Item>
                 <Menu.Item key="10">option10</Menu.Item>
@@ -94,7 +108,8 @@ export class IndexPage extends React.Component{
             </Breadcrumb>
             <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
               <Route path="/lead/1" exact component={LeadSteps} />
-              <Route path="/index" exact component={ReadMe} />
+              <Route path="/" exact component={ReadMe} />
+              <Route path="/5step/problem" exact component={Problems} />
             </Content>
           </Layout>
         </Layout>
