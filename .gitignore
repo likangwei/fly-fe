@@ -5,7 +5,7 @@
 
 # production
 /dist
-
+fly-fe.tar.gz
 # misc
 .DS_Store
 npm-debug.log*
