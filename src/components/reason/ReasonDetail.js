@@ -24,7 +24,7 @@ const Why = () => {
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 16 }}
     >
-      <Input value={this.props.val}/> 
+      <Input value={val}/> 
     </FormItem>
   )
 }
