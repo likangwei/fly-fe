@@ -16,44 +16,87 @@ const FormItem = Form.Item;
 const { TextArea } = Input;
 const PAGE_SIZE = 1000
 
-const Why = () => {
-  return (
-    <FormItem
-      id="control-mention"
-      label="为什么"
-      labelCol={{ span: 6 }}
-      wrapperCol={{ span: 16 }}
-    >
-      <Input value={this.props.val}/> 
-    </FormItem>
-  )
+class QA extends React.Component{
+
+  constructor(props){
+    super(props)
+    this.state = props.val || {
+      why: "",
+      ans: "",
+    }
+  }
+
+  componentWillReceiveNextProps(nextProps){
+    this.setState(nextProps.val)
+  }
+
+  onWhyChange = (e) => {
+    let qa = Object.assign(this.state)
+    qa.why = e.target.value
+    this.setState({val: e.target.value})
+    if(this.props.onChange !== null){
+      this.props.onChange(qa)
+    }
+  }
+
+  onAnswerChange = (e) => {
+    let qa = Object.assign(this.state)
+    qa.ans = e.target.value
+    this.setState(qa)
+    if(this.props.onChange !== null){
+      this.props.onChange(qa)
+    }
+  }
+
+  render(){
+    return (
+      <div>
+        <FormItem
+          id="control-mention"
+          label="为什么"
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 16 }}
+        >
+          <Input value={this.state.why} onChange={this.onWhyChange}/> 
+        </FormItem>
+
+        <FormItem
+        id="control-mention"
+        label="因为"
+        labelCol={{ span: 6 }}
+        wrapperCol={{ span: 16 }}
+        >
+          <Input value={this.state.ans} onChange={this.onAnswerChange}/> 
+        </FormItem>
+      </div>
+    )
+  }
 }
 
-const Answser = (val) => {
-  return (
-    <FormItem
-      id="control-mention"
-      label="因为"
-      labelCol={{ span: 6 }}
-      wrapperCol={{ span: 16 }}
-    >
-      <Input value={this.props.val}/> 
-    </FormItem>
-  )
-}
 
 class ReasonDetail extends React.Component{
 
   constructor(props){
     super(props)
     this.state = {
-      analysis: [""]
+      analysis: []
     }
   }
 
   addRecord = () => {
     let analysis = this.state.analysis
-    analysis.push("")
+    let record = {}
+    if(analysis.length > 0){
+      record.why = analysis[analysis.length-1].ans
+    }
+    analysis.push(record)
+    this.setState({analysis})
+  }
+
+  onAnalysisEdit(idx, val){
+    console.log(idx, val)
+    let analysis = this.state.analysis
+    analysis[idx] = val
     this.setState({analysis})
   }
 
@@ -76,11 +119,7 @@ class ReasonDetail extends React.Component{
     let analysisComp = []
     for (let i=0; i<analysis.length; i=i+1){
       let val = analysis[i]
-      if (i%2 == 0){
-        analysisComp.push(<Why val={val}/>)
-      }else{
-        analysisComp.push(<Answser val={val}/>)
-      }
+      analysisComp.push(<QA val={val} onChange={(value)=>this.onAnalysisEdit(i, value)}/>)
     }
     return (
       <Form layout="horizontal">
@@ -112,5 +151,6 @@ function mapStateToProps(state) {
     page,
   };
 }
+ReasonDetail = Form.create()(ReasonDetail);
 
 export default connect(mapStateToProps)(ReasonDetail);
