@@ -59,7 +59,6 @@ class QA extends React.Component{
         >
           <Input value={this.state.why} onChange={this.onWhyChange}/> 
         </FormItem>
-
         <FormItem
         id="control-mention"
         label="因为"
