@@ -9,6 +9,8 @@ import Problems from '../components/problem/Problems'
 import Reasons from '../components/reason/Reasons'
 import ReasonDetail from '../components/reason/ReasonDetail'
 
+import Points from '../components/point/Points'
+
 
 
 
@@ -103,8 +105,12 @@ export class IndexPage extends React.Component{
                 <Menu.Item key="4">option4</Menu.Item>
               </SubMenu>
 
-              <SubMenu key="sub3" title={<span><Icon type="notification" />subnav 3</span>}>
-                <Menu.Item key="9">option9</Menu.Item>
+              <SubMenu key="sub3" title={<span><Icon type="notification" />集点器</span>}>
+                <Menu.Item key="collect_points">
+                  <Link to={`/collect_points/points`}>
+                    点
+                  </Link>
+                </Menu.Item>
                 <Menu.Item key="10">option10</Menu.Item>
                 <Menu.Item key="11">option11</Menu.Item>
                 <Menu.Item key="12">option12</Menu.Item>
@@ -121,6 +127,8 @@ export class IndexPage extends React.Component{
               <Route path="/5step/problem" exact component={Problems} />
               <Route path="/5step/reason" exact component={Reasons} />
               <Route path="/5step/reason/:id" exact component={ReasonDetail} />
+              <Route path="/collect_points/points" exact component={Points} />
+              
             </Content>
           </Layout>
         </Layout>

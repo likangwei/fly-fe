@@ -14,6 +14,7 @@ app.use(createLoading());
 // app.model(require('./models/example').default);
 app.model(require('./models/problem').default);
 app.model(require('./models/reason').default);
+app.model(require('./models/point').default);
 
 // 4. Router
 app.router(require('./router').default);
