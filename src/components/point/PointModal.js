@@ -4,6 +4,7 @@ import moment from 'moment';
 
 const FormItem = Form.Item;
 const dateFormat = "YYYY-MM-DD HH:mm:ss"
+
 class PointEditModal extends Component {
   constructor(props) {
     super(props);
@@ -41,6 +42,7 @@ class PointEditModal extends Component {
     const { children } = this.props;
     const { getFieldDecorator } = this.props.form;
     const { ct, content } = this.props.record;
+    console.log(ct,  )
     const config = {
       rules: [{ type: 'object', required: true, message: 'Please select time!' }],
     };
@@ -66,7 +68,7 @@ class PointEditModal extends Component {
             <FormItem {...formItemLayout} label="ct">
               {
                 getFieldDecorator('ct', {
-                  initialValue: moment(ct*1000)
+                  initialValue: ct === undefined ?  null : moment(ct*1000) 
                 })(
                   <DatePicker
                     showTime
