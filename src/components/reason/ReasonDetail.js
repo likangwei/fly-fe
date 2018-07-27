@@ -141,6 +141,10 @@ class ReasonDetail extends React.Component{
       let val = analysis[i]
       analysisComp.push(<QA val={val} onChange={(value)=>this.onAnalysisEdit(i, value)}/>)
     }
+
+
+ 
+    
     return (
       <Form layout="horizontal">
         <TextArea
