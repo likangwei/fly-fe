@@ -43,7 +43,7 @@ function Problems({ dispatch, list: dataSource, loading, total, page: current })
       title: 'title',
       dataIndex: 'title',
       key: 'title',
-      render: text => <a href="">{text}</a>,
+      render: text => text,
     },
     {
       title: 'content',
