@@ -44,7 +44,7 @@ function Reasons({ dispatch, list: dataSource, loading, total, page: current }) 
       dataIndex: 'content',
       key: 'content',
       render: (text, record) =>(
-        <Link to={`/5step/reason/${record.id}`}>text</Link>
+        <Link to={`/5step/reason/${record.id}`}>{text}</Link>
       )
     },
     {

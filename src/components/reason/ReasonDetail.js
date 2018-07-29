@@ -49,6 +49,7 @@ class QA extends React.Component{
   }
 
   render(){
+
     return (
       <div>
         <FormItem
@@ -78,6 +79,7 @@ class ReasonDetail extends React.Component{
   constructor(props){
     super(props)
     this.state = {
+      record: this.getRecord(),
       analysis: []
     }
   }
@@ -99,7 +101,21 @@ class ReasonDetail extends React.Component{
     this.setState({analysis})
   }
 
-  render(){
+  onSave = () => {
+    let analysis = this.state.analysis
+    let texts = []
+    for(let i=0; i<analysis.length; i++){
+      let c = analysis[i]
+      texts.push("为什么" + c.why + "?")
+      texts.push("因为" + c.ans + "\n")
+    }
+    let record = Object.assign(this.state.record)
+    record.content = texts.join("\n")
+    this.setState({record})
+
+  }
+
+  getRecord(){
     const {list} = this.props
     let match = this.props.match
     console.log(match.params.id)
@@ -111,6 +127,11 @@ class ReasonDetail extends React.Component{
         break
       }
     }
+    return record
+  }
+
+  render(){
+    let {record} = this.state
     if (record == null){
       return <div>无效的ID</div>
     }
@@ -120,19 +141,26 @@ class ReasonDetail extends React.Component{
       let val = analysis[i]
       analysisComp.push(<QA val={val} onChange={(value)=>this.onAnalysisEdit(i, value)}/>)
     }
+
+
+ 
+    
     return (
       <Form layout="horizontal">
-        reason detail
+        <TextArea
+          value={record.content}
+        />
+        
         <FiveWhy />
         <TextArea 
           placeholder="" 
           autosize={{ minRows: 2, maxRows: 600 }} 
         />
         {analysisComp}
-        <Button type="primary" htmlType="submit" onClick={this.addRecord}>
+        <Button type="primary" onClick={this.addRecord}>
             添加
         </Button>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" onClick={this.onSave}>
             保存
         </Button>
       </Form>
@@ -144,10 +172,7 @@ class ReasonDetail extends React.Component{
 function mapStateToProps(state) {
   const { list, total, page } = state.reasons;
   return {
-    loading: state.loading.models.reasons,
-    list,
-    total,
-    page,
+    list
   };
 }
 ReasonDetail = Form.create()(ReasonDetail);
