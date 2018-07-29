@@ -118,12 +118,16 @@ class RealReason extends React.Component{
         $(go.Adornment, "Vertical",
           $("ContextMenuButton",
             $(go.TextBlock, "Rename"),
-            { click: function(e, obj) { e.diagram.commandHandler.editTextBlock(); } },
+            { 
+              click: function(e, obj) { 
+                e.diagram.commandHandler.editTextBlock(); 
+              } 
+            },
             new go.Binding("visible", "", function(o) { return o.diagram && o.diagram.commandHandler.canEditTextBlock(); }).ofObject()),
           // add one for Editing...
           $("ContextMenuButton",
             $(go.TextBlock, "Delete"),
-            { 
+            {
               click: function(e, obj) {
                 var fromNode = obj.part;
                 console.log(myDiagram.model.getKeyForNodeData(fromNode))
@@ -273,7 +277,14 @@ class RealReason extends React.Component{
       myDiagram.addDiagramListener("TextEdited", function(e) {
         console.log(e.name, e.parameter, e.subject)
       });
-
+      myDiagram.addDiagramListener("ChangedSelection", function(e) {
+        let it = myDiagram.selection.iterator
+        while(it.next()){
+          let item = it.value
+          console.log(item.data)
+        }
+      });
+      
       // Connecting a link with the Recycle node removes the link
       myDiagram.addDiagramListener("LinkDrawn", function(e) {
         var link = e.subject;
