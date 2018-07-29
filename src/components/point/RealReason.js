@@ -225,7 +225,7 @@ class RealReason extends React.Component{
         };
         console.log(linkdata)
         let newData = {content: toData.text}
-        comp.addNewReason(linkdata.from, newData)
+        comp.addNewRelation(linkdata.from, newData)
         // and add the link data to the model
         model.addLinkData(linkdata);
         // select the new Node
@@ -269,6 +269,9 @@ class RealReason extends React.Component{
           }
         }
         
+      });
+      myDiagram.addDiagramListener("TextEdited", function(e) {
+        console.log(e.name, e.parameter, e.subject)
       });
 
       // Connecting a link with the Recycle node removes the link
