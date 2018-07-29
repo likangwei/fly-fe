@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import { Modal, Form, Input, DatePicker } from 'antd';
 import moment from 'moment';
 import PointList from './PointList'
+import { Select } from 'antd';
+import { connect } from 'dva';
+
 
 const FormItem = Form.Item;
 const dateFormat = "YYYY-MM-DD HH:mm:ss"
-class PointEditModal extends Component {
+
+const Option = Select.Option;
+
+class AddReasonModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: false,
+      why_id: null,
     };
   }
 
@@ -26,13 +33,15 @@ class PointEditModal extends Component {
     });
   };
 
+  handleChange = (value) => {
+    this.setState({why_id: value})
+  }
+
   okHandler = () => {
     const { onOk } = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        let dt = Object.assign(values)
-        dt.ct = dt.ct.unix()
-        onOk(dt);
+        onOk(this.state.why_id);
         this.hideModelHandler();
       }
     });
@@ -41,14 +50,16 @@ class PointEditModal extends Component {
   render() {
     const { children } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const { ct, content } = this.props.record;
-    const config = {
-      rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-    };
-    const formItemLayout = {
-      labelCol: { span: 6 },
-      wrapperCol: { span: 14 },
-    };
+    const list = this.props.list;
+    const record = this.props.record
+    let sels = []
+    for(let i=0; i<list.length; i++){
+      const {content, ct, id} = list[i]
+      sels.push(
+        <Option key={id} value={id}>{content}</Option>
+      )
+    }
+    
     return (
       <span>
         <span onClick={this.showModelHandler}>{children}</span>
@@ -58,27 +69,14 @@ class PointEditModal extends Component {
           onOk={this.okHandler}
           onCancel={this.hideModelHandler}
         >
+          <p>为什么{record.content}?</p>
           <Form layout="horizontal" onSubmit={this.okHandler}>
-            <FormItem {...formItemLayout} label="content">
-              {getFieldDecorator('content', {
-                initialValue: content,
-              })(<Input />)}
-            </FormItem>
-            <FormItem {...formItemLayout} label="ct">
-              {
-                getFieldDecorator('ct', {
-                  initialValue: moment(ct*1000)
-                })(
-                  <DatePicker
-                    showTime
-                    format="YYYY-MM-DD HH:mm:ss" 
-                  />
-                )
-              }
-            </FormItem>
-            <FormItem>
-              <PointList />
-            </FormItem>
+            <Select 
+              style={{ width: 120 }} onChange={this.handleChange}
+              value={this.state.why_id}
+            >
+              {sels}
+            </Select>
           </Form>
         </Modal>
       </span>
@@ -86,4 +84,15 @@ class PointEditModal extends Component {
   }
 }
 
-export default Form.create()(PointEditModal);
+function mapStateToProps(state) {
+  const { list, total, page } = state.points;
+  return {
+    loading: state.loading.models.points,
+    list,
+    total,
+    page,
+  };
+}
+
+AddReasonModal = Form.create()(AddReasonModal)
+export default connect(mapStateToProps)(AddReasonModal);

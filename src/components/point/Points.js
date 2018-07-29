@@ -4,10 +4,18 @@ import { Table, Pagination, Popconfirm, Button } from 'antd';
 import { routerRedux, Link } from 'dva/router';
 import styles from './Points.css';
 import PointModal from './PointModal';
+import AddReasonModal from './AddReasonModal'
+import { Alert } from 'antd';
+import { TreeSelect } from 'antd';
+import RealReason from './RealReason'
+const TreeNode = TreeSelect.TreeNode;
+
 
 const PAGE_SIZE = 1000
 
-function Points({ dispatch, list: dataSource, loading, total, page: current }) {
+
+
+function Points({ dispatch, list: dataSource, loading, total, alert, page: current }) {
   function deleteHandler(id) {
     dispatch({
       type: 'points/remove',
@@ -24,10 +32,24 @@ function Points({ dispatch, list: dataSource, loading, total, page: current }) {
     );
   }
 
+  function closeAlertHandler() {
+    dispatch({
+      type: 'points/closeAlert',
+    });
+  }
+
+
   function editHandler(id, values) {
     dispatch({
       type: 'points/patch',
       payload: { id, values },
+    });
+  }
+
+  function creteReasonHandler(id, why_id){
+    dispatch({
+      type: 'points/addRelation',
+      payload: {why: why_id, so: id},
     });
   }
 
@@ -61,14 +83,28 @@ function Points({ dispatch, list: dataSource, loading, total, page: current }) {
           >
             <a href="">Delete</a>
           </Popconfirm>
+          <AddReasonModal record={record} onOk={creteReasonHandler.bind(null, record.id)}>
+            <button>Add Why</button>
+          </AddReasonModal>
         </span>
       ),
     },
   ];
-
+  let alertComp = null
+  if (alert.open){
+    alertComp = <Alert
+      key="alert"
+      message={alert.msg}
+      type="warning"
+      closable
+      onClose={closeAlertHandler.bind(null)}
+    />
+  }
   return (
     <div className={styles.normal}>
       <div>
+        {alertComp}
+        <RealReason />
         <div className={styles.create}>
           <PointModal record={{}} onOk={createHandler}>
             <Button type="primary">Create Point</Button>
@@ -94,12 +130,13 @@ function Points({ dispatch, list: dataSource, loading, total, page: current }) {
 }
 
 function mapStateToProps(state) {
-  const { list, total, page } = state.points;
+  const { list, total, page, alert } = state.points;
   return {
     loading: state.loading.models.points,
     list,
     total,
     page,
+    alert,
   };
 }
 

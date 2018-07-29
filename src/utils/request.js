@@ -1,8 +1,14 @@
 import fetch from 'dva/fetch';
+const axios = require('axios');
 
 function parseJSON(response) {
   return response.json();
 }
+
+function parseResponse(response) {
+  return {data: response.json(), status: response.status};
+}
+
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -26,5 +32,13 @@ export default function request(url, options) {
     .then(checkStatus)
     .then(parseJSON)
     .then(data => ({ data }))
+    .catch(err => ({ err }));
+}
+
+export function requestWithStatus(url, options) {
+  return fetch(url, options)
+    .then(checkStatus)
+    .then(parseResponse)
+    .then(data => (data))
     .catch(err => ({ err }));
 }

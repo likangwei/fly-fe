@@ -13,7 +13,6 @@ import Points from '../components/point/Points'
 
 
 
-
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
@@ -128,7 +127,6 @@ export class IndexPage extends React.Component{
               <Route path="/5step/reason" exact component={Reasons} />
               <Route path="/5step/reason/:id" exact component={ReasonDetail} />
               <Route path="/collect_points/points" exact component={Points} />
-              
             </Content>
           </Layout>
         </Layout>

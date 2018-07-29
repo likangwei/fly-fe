@@ -1,4 +1,5 @@
 import request from '../utils/request';
+const axios = require('axios');
 
 const PAGE_SIZE = 1000
 
@@ -20,8 +21,5 @@ export function patch(id, values) {
 }
 
 export function create(values) {
-  return request('/v1/reason', {
-    method: 'POST',
-    body: JSON.stringify(values),
-  });
+  return axios.post('/v1/reason', JSON.stringify(values));
 }

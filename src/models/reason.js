@@ -16,6 +16,7 @@ export default {
     *fetch({}, { call, put }) {
       console.log("fetch....")
       const { data, headers } = yield call(reasonService.fetch);
+      console.log(data, headers)
       yield put({
         type: 'save',
         payload: {
