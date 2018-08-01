@@ -8,10 +8,8 @@ import LeadSteps from '../components/LeadSteps'
 import Problems from '../components/problem/Problems'
 import Reasons from '../components/reason/Reasons'
 import ReasonDetail from '../components/reason/ReasonDetail'
-
+import Decisons from '../components/decision/Decisions'
 import Points from '../components/point/Points'
-
-
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -27,7 +25,6 @@ const ReadMe = () => {
       引导很重要。 要有特别舒服的引导，躺着进化的感觉。
       要能展示出来自己的进步，形成正向激励
       </pre>
-      
     </div>
   )
 }
@@ -87,8 +84,8 @@ export class IndexPage extends React.Component{
 
               <SubMenu key="sub1" title={<span><Icon type="user" />引导</span>}>
                 <Menu.Item key="1">
-                  <Link to="/lead/1">
-                    lead
+                  <Link to="/decision/">
+                    决策
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="2">
@@ -127,6 +124,8 @@ export class IndexPage extends React.Component{
               <Route path="/5step/reason" exact component={Reasons} />
               <Route path="/5step/reason/:id" exact component={ReasonDetail} />
               <Route path="/collect_points/points" exact component={Points} />
+              <Route path="/decision/*" exact component={Decisons} />
+
             </Content>
           </Layout>
         </Layout>
