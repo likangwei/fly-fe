@@ -52,7 +52,10 @@ class DecisionDetail extends React.Component {
     const titleError = isFieldTouched('title') && getFieldError('title');
     const contentError = isFieldTouched('content') && getFieldError('content');
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <div>
+        <a href="http://fromwiz.com/share/s/36Ha2336xA_02MxC2h0y0ZS11Hd1Kf3QKQaZ2vgkSY0Mkaos">5 学会决策</a>
+        <Form onSubmit={this.handleSubmit}>
+
         <FormItem
           validateStatus={titleError ? 'error' : ''}
           help={titleError || ''}
@@ -72,7 +75,7 @@ class DecisionDetail extends React.Component {
             rules: [{ required: true, message: 'Please input your content!' }],
             initialValue: Content,
           })(
-            <TextArea rows={40} placeholder="Content"/>
+            <TextArea autosize={{ minRows: 20, maxRows: 600 }}  placeholder="Content"/>
           )}
         </FormItem>
         <FormItem>
@@ -85,6 +88,8 @@ class DecisionDetail extends React.Component {
           </Button>
         </FormItem>
       </Form>
+      </div>
+      
     );
   }
 }
