@@ -72,7 +72,7 @@ class DecisionDetail extends React.Component {
             rules: [{ required: true, message: 'Please input your content!' }],
             initialValue: Content,
           })(
-            <TextArea rows={4} placeholder="Content"/>
+            <TextArea rows={40} placeholder="Content"/>
           )}
         </FormItem>
         <FormItem>
