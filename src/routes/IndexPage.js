@@ -13,6 +13,7 @@ import Points from '../components/point/Points'
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
+
 const Encourage = () => {
   return (
     <div>
@@ -23,6 +24,17 @@ const Encourage = () => {
     </div>
   )
 }
+
+const Principle = () => {
+  return (
+    <div>
+      <a target="_blank" href="https://likangwei.worktile.com/drive/5b719825c2bf4a3b972538d1/5b719b48c2bf4a3b972538d5">决策自问</a>
+      <br />
+      <a target="_blank" href="https://likangwei.worktile.com/drive/5b719825c2bf4a3b972538d1/5b719875c2bf4a3b972538d3">决策原则</a>
+    </div>
+  )
+}
+
 const ReadMe = () => {
   return (
     <div>
@@ -88,7 +100,11 @@ export class IndexPage extends React.Component{
                 </Menu.Item>
                 <Menu.Item key="make_plan">制定方案</Menu.Item>
                 <Menu.Item key="do">坚定执行</Menu.Item>
-                <Menu.Item key="principle">总结原则</Menu.Item>
+                <Menu.Item key="principle">
+                  <Link to="/principle/">
+                    总结原则
+                  </Link>
+                </Menu.Item>
               </SubMenu>
 
               <SubMenu key="sub1" title={<span><Icon type="user" />引导</span>}>
@@ -135,7 +151,7 @@ export class IndexPage extends React.Component{
               <Route path="/collect_points/points" exact component={Points} />
               <Route path="/decision/*" exact component={Decisons} />
               <Route path="/encourage/" exact component={Encourage} />
-
+              <Route path="/principle/" exact component={Principle} />
             </Content>
           </Layout>
         </Layout>
