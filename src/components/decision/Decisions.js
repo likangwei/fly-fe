@@ -89,7 +89,7 @@ function DecisionList({ dispatch, list: dataSource, loading, total, alert, page:
             title="Confirm to delete?"
             onConfirm={deleteHandler.bind(null, record.Id)}
           >
-            <a href="">Delete</a>
+          <a href="">Delete</a>
           </Popconfirm>
         </span>
       ),

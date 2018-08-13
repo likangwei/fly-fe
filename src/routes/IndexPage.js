@@ -13,7 +13,16 @@ import Points from '../components/point/Points'
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
-
+const Encourage = () => {
+  return (
+    <div>
+      <a target="_blank" href="https://likangwei.worktile.com/drive/root/5b712709e66c5456a9c36080">鼓励一波</a>
+      <p>努力拼搏并不知会让你顺境更好，还会让你逆境不那么糟糕。我至今仍然苦拼，因为就算想躲避，痛苦还是会找上你。 --达里奥</p>
+      <p>坏心情总会来敲门，但是别让坏心情成为制造更多坏情绪的原因（情绪化做失误的决策等等)</p>
+      <p>既往不恋，纵情向前</p>
+    </div>
+  )
+}
 const ReadMe = () => {
   return (
     <div>
@@ -89,8 +98,8 @@ export class IndexPage extends React.Component{
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="2">
-                 <Link to="/index">
-                    index
+                 <Link to="/encourage">
+                    鼓励
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="3">
@@ -125,6 +134,7 @@ export class IndexPage extends React.Component{
               <Route path="/5step/reason/:id" exact component={ReasonDetail} />
               <Route path="/collect_points/points" exact component={Points} />
               <Route path="/decision/*" exact component={Decisons} />
+              <Route path="/encourage/" exact component={Encourage} />
 
             </Content>
           </Layout>
