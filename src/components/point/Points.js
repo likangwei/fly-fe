@@ -70,6 +70,15 @@ function Points({ dispatch, list: dataSource, loading, total, alert, page: curre
       )
     },
     {
+      title: 'ct',
+      dataIndex: 'ct',
+      key: 'ct',
+      render: (text, record) => {
+        let dt = new Date(record.ct*1000).toLocaleString()
+        return <div>{dt}</div>
+      }
+    },
+    {
       title: 'Operation',
       key: 'operation',
       render: (text, record) => (
