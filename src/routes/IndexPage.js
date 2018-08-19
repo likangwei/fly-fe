@@ -21,8 +21,11 @@ const Encourage = () => {
       <p>努力拼搏并不只会让你顺境更好，还会让你逆境不那么糟糕。我至今仍然苦拼，因为就算想躲避，痛苦还是会找上你。 --达里奥</p>
       <p>坏心情总会来敲门，但是别让坏心情成为制造更多坏情绪的原因（情绪化做失误的决策等等)</p>
       <p>既往不恋，纵情向前</p>
+      <br />
       <a target="_blank" href="https://likangwei.worktile.com/drive/5b719825c2bf4a3b972538d1/5b719875c2bf4a3b972538d3">决策原则</a>
+      <br />
       <a target="_blank" href="https://likangwei.worktile.com/drive/5b719825c2bf4a3b972538d1/5b7971bfde38dc17cac6872a">好心情引导</a>
+      <br />
       <a target="_blank" href="https://likangwei.worktile.com/drive/5b719825c2bf4a3b972538d1/5b719b48c2bf4a3b972538d5">决策自问</a>
 
 
