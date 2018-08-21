@@ -16,6 +16,7 @@ app.model(require('./models/problem').default);
 app.model(require('./models/reason').default);
 app.model(require('./models/point').default);
 app.model(require('./models/decision').default);
+app.model(require('./models/chose').default);
 
 // 4. Router
 app.router(require('./router').default);
