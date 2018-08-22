@@ -8,7 +8,7 @@ function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
 
-class ChoseDetail extends React.Component {
+class OptionDetail extends React.Component {
 
   constructor(props){
     super(props)
@@ -96,7 +96,7 @@ class ChoseDetail extends React.Component {
   }
 }
 
-ChoseDetail = Form.create()(ChoseDetail);
+OptionDetail = Form.create()(OptionDetail);
 
 function mapStateToProps(state) {
   const { list, total, page, alert} = state.options;
@@ -105,4 +105,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ChoseDetail)
+export default connect(mapStateToProps)(OptionDetail)

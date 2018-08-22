@@ -122,7 +122,7 @@ function OptionList({ dispatch, list: dataSource, loading, total, alert, page: c
     <div >
       <div>
         {alertComp}
-        <button onClick={()=>createHandler({Content: "new"})}>新建选项</button>
+        <button onClick={()=>createHandler({Content: "new", Decision: {Id: 1}})}>新建选项</button>
         <Table
           columns={columns}
           dataSource={dataSource}
