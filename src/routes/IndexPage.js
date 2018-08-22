@@ -10,7 +10,7 @@ import Reasons from '../components/reason/Reasons'
 import ReasonDetail from '../components/reason/ReasonDetail'
 import Decisons from '../components/decision/Decisions'
 import Points from '../components/point/Points'
-import Choses from '../components/chose/Choses'
+import Options from '../components/option/Options'
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -122,9 +122,9 @@ export class IndexPage extends React.Component{
                     决策
                   </Link>
                 </Menu.Item>
-                <Menu.Item key="chose">
-                  <Link to="/chose/">
-                    选择
+                <Menu.Item key="option">
+                  <Link to="/option/">
+                    选项
                   </Link>
                 </Menu.Item>
                 <Menu.Item key="anticipation">
@@ -171,7 +171,7 @@ export class IndexPage extends React.Component{
               <Route path="/decision/*" exact component={Decisons} />
               <Route path="/encourage/" exact component={Encourage} />
               <Route path="/principle/" exact component={Principle} />
-              <Route path="/chose/*" exact component={Choses} />
+              <Route path="/option/*" exact component={Options} />
 
             </Content>
           </Layout>

@@ -1,7 +1,7 @@
-import * as choseService from '../services/chose';
+import * as optionService from '../services/option';
 
 export default {
-  namespace: 'choses',
+  namespace: 'options',
   state: {
     list: [],
     total: null,
@@ -20,7 +20,7 @@ export default {
   effects: {
     *fetch({}, { call, put }) {
       console.log("fetch....")
-      let { data } = yield call(choseService.fetch);
+      let { data } = yield call(optionService.fetch);
       yield put({
         type: 'save',
         payload: {
@@ -32,16 +32,16 @@ export default {
 
     },
     *remove({ payload: id }, { call, put, select}) {
-      yield call(choseService.remove, id);
+      yield call(optionService.remove, id);
       yield put({ type: 'reload' });
     },
     
     *patch({ payload: { id, values } }, { call, put }) {
-      yield call(choseService.patch, id, values);
+      yield call(optionService.patch, id, values);
       yield put({ type: 'reload' });
     },
     *create({ payload: values }, { call, put }) {
-      yield call(choseService.create, values);
+      yield call(optionService.create, values);
       yield put({ type: 'reload' });
     },
     *reload(action, { put, select }) {
@@ -58,7 +58,7 @@ export default {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query }) => {
         console.log(pathname, query)
-        if (pathname === '/chose/') {
+        if (pathname === '/option/') {
           dispatch({ type: 'fetch' });
         }
       });

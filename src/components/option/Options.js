@@ -5,7 +5,7 @@ import { routerRedux, Link } from 'dva/router';
 import { Alert } from 'antd';
 import { TreeSelect } from 'antd';
 import { Router, Route, Switch } from 'dva/router';
-import ChoseDetail from './ChoseDetail'
+import OptionDetail from './OptionDetail'
 
 
 const TreeNode = TreeSelect.TreeNode;
@@ -14,10 +14,11 @@ const TreeNode = TreeSelect.TreeNode;
 const PAGE_SIZE = 1000
 
 
-function ChoseList({ dispatch, list: dataSource, loading, total, alert, page: current }) {
+function OptionList({ dispatch, list: dataSource, loading, total, alert, page: current }) {
+
   function deleteHandler(id) {
     dispatch({
-      type: 'choses/remove',
+      type: 'options/remove',
       payload: id,
     });
   }
@@ -33,28 +34,28 @@ function ChoseList({ dispatch, list: dataSource, loading, total, alert, page: cu
 
   function closeAlertHandler() {
     dispatch({
-      type: 'choses/closeAlert',
+      type: 'options/closeAlert',
     });
   }
 
 
   function editHandler(id, values) {
     dispatch({
-      type: 'choses/patch',
+      type: 'options/patch',
       payload: { id, values },
     });
   }
 
   function creteDecisionHandler(id, why_id){
     dispatch({
-      type: 'choses/addRelation',
+      type: 'options/addRelation',
       payload: {why: why_id, so: id},
     });
   }
 
   function createHandler(values) {
     dispatch({
-      type: 'choses/create',
+      type: 'options/create',
       payload: values,
     });
   }
@@ -66,7 +67,7 @@ function ChoseList({ dispatch, list: dataSource, loading, total, alert, page: cu
       key: 'Id',
       render: (text, record) =>(
         <div>
-          <Link to={`/chose/${record.Id}`}>
+          <Link to={`/option/${record.Id}`}>
             {record.Id}
           </Link>
         </div>
@@ -121,7 +122,7 @@ function ChoseList({ dispatch, list: dataSource, loading, total, alert, page: cu
     <div >
       <div>
         {alertComp}
-        <button onClick={()=>createHandler({Content: "new"})}>新建选择</button>
+        <button onClick={()=>createHandler({Content: "new"})}>新建选项</button>
         <Table
           columns={columns}
           dataSource={dataSource}
@@ -142,24 +143,24 @@ function ChoseList({ dispatch, list: dataSource, loading, total, alert, page: cu
 }
 
 function mapStateToProps(state) {
-  const { list, total, page, alert } = state.choses;
+  const { list, total, page, alert } = state.options;
   return {
-    loading: state.loading.models.choses,
+    loading: state.loading.models.options,
     list,
     total,
     page,
     alert,
   };
 }
-ChoseList = connect(mapStateToProps)(ChoseList);
+OptionList = connect(mapStateToProps)(OptionList);
 
-export default class Choses extends React.Component{
+export default class Options extends React.Component{
 
   render(){
     return (
       <div>
-        <Route path="/chose/" exact component={ChoseList} />
-        <Route path="/chose/:id" exact component={ChoseDetail} />
+        <Route path="/option/" exact component={OptionList} />
+        <Route path="/option/:id" exact component={OptionDetail} />
       </div>
     )
   }

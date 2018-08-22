@@ -99,7 +99,7 @@ class ChoseDetail extends React.Component {
 ChoseDetail = Form.create()(ChoseDetail);
 
 function mapStateToProps(state) {
-  const { list, total, page, alert} = state.choses;
+  const { list, total, page, alert} = state.options;
   return {
     list
   };
