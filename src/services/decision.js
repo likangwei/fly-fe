@@ -6,6 +6,12 @@ export function fetch() {
   return request(`/v1/decision?limit=${PAGE_SIZE}`);
 }
 
+export function getOne(id) {
+  return request(`/v1/decision/${id}`, {
+    method: 'GET',
+  });
+}
+
 export function remove(id) {
   return request(`/v1/decision/${id}`, {
     method: 'DELETE',

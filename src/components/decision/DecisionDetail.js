@@ -22,7 +22,8 @@ class DecisionDetail extends React.Component {
   componentDidMount() {
     this.props.form.validateFields();
     this.props.dispatch({
-      type: 'decisions/fetch',
+      type: 'decisions/fetchOne',
+      payload: this.state.Id
     });
   }
 
@@ -41,18 +42,22 @@ class DecisionDetail extends React.Component {
 
   render() {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-    const {list} = this.props
+    const {decisions} = this.props
+    let m = decisions.m
     let record_id = this.state.Id
-    
-    let records = list.filter(function(x){return x.Id==record_id})
-    if(records.length != 1){
+    let record = m[record_id]
+    console.log(record)
+    if(record == null){
       return <div>not found {this.state.Id}</div>
     }
-    let {Title, Content} = records[0]
+    let {Title, Content} = record
     const titleError = isFieldTouched('title') && getFieldError('title');
     const contentError = isFieldTouched('content') && getFieldError('content');
     return (
       <div>
+        <pre>
+        {JSON.stringify(record, null, 2)}
+        </pre>
         <a href="http://fromwiz.com/share/s/36Ha2336xA_02MxC2h0y0ZS11Hd1Kf3QKQaZ2vgkSY0Mkaos">5 学会决策</a>
         <Form onSubmit={this.handleSubmit}>
 
@@ -97,9 +102,8 @@ class DecisionDetail extends React.Component {
 DecisionDetail = Form.create()(DecisionDetail);
 
 function mapStateToProps(state) {
-  const { list, total, page, alert} = state.decisions;
   return {
-    list
+    "decisions": state.decisions
   };
 }
 

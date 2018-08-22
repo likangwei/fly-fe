@@ -22,7 +22,7 @@ class OptionDetail extends React.Component {
   componentDidMount() {
     this.props.form.validateFields();
     this.props.dispatch({
-      type: 'choses/fetch',
+      type: 'options/fetch',
     });
   }
 
@@ -32,7 +32,7 @@ class OptionDetail extends React.Component {
       if (!err) {
         console.log('Received values of form: ', values);
         this.props.dispatch({
-          type: 'choses/patch',
+          type: 'options/patch',
           payload: {id: this.state.Id, values},
         });
       }

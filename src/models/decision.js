@@ -4,6 +4,7 @@ export default {
   namespace: 'decisions',
   state: {
     list: [],
+    m: {},
     total: null,
     page: 1,
     alert: {msg: "hello~ i'm alert!", open: false},
@@ -15,6 +16,11 @@ export default {
     },
     saveAlert(state, {payload: {msg, open=true}}){
       return {...state, alert: {msg, open: open}}
+    },
+    saveOne(state, {payload: {id: id, record: record}}){
+      let cp = {...state}
+      cp.m[record.Id] = record
+      return cp
     }
   },
   effects: {
@@ -35,7 +41,10 @@ export default {
       yield call(decisionService.remove, id);
       yield put({ type: 'reload' });
     },
-    
+    *fetchOne({ payload: id }, { call, put, select}) {
+      let {data} = yield call(decisionService.getOne, id);
+      yield put({type: 'saveOne', payload: {id: id, record: data}})
+    },
     *patch({ payload: { id, values } }, { call, put }) {
       yield call(decisionService.patch, id, values);
       yield put({ type: 'reload' });
